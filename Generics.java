@@ -35,7 +35,7 @@ public class Generics {
         logger.info("Enter number of elements in array: ");
         int n = sc.nextInt();
 
-        Integer[] a = new Integer[n];       //Creating Integer object
+        Integer[] a = new Integer[n];       //Creating Integer object with reference variable a
 
         //for loop for initializing elements in array
         for(int i = 0; i < n; i++) {
