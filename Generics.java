@@ -7,109 +7,57 @@ package com.bridgelabz.generics;
 import org.apache.log4j.Logger;
 import org.apache.log4j.BasicConfigurator;
 
-import java.util.Scanner;
-
-public class Generics {
+public class Generics <E extends Comparable<E>> {
     static Logger logger = Logger.getLogger(Generics.class);
-    Scanner sc = new Scanner(System.in);    //Creating Scanner object
-    static int maxInteger;     // Declaring static max variable
-    static float maxFloat;
 
-    /* Creating maxInteger method for finding max value from Integer array */
-    public void maxInteger(Integer[] a) {
-        // Using extended for loop for finding max integer value
-        for(int data : a) {
-            if(data > maxInteger) {        //Assigning value to maxInteger if element of array is greater than maxInteger
-                maxInteger = data;
-            }
-        }
+    /* Creating variable x,y,z of generic data type */
+    E x;
+    E y;
+    E z;
 
-        //Printing maxInteger value
-        logger.info("Maximum integer value is: " + maxInteger + "\n");
+    /* Assigning value to x,y,z using parameterized constructor*/
+    public Generics(E x, E y, E z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
-    /* Creating printMaxInteger method for taking user input and printing max value */
-    public void printMaxInteger() {
-        //Taking user input for number of elements in Integer array
-        logger.info("Enter number of elements in Integer array: ");
-        int n1 = sc.nextInt();
+    /* Creating Maximum method to find max value */
+    public static <E extends Comparable<E>> void maximum(E x, E y, E z) {
+        E max = x;      //Initializing 1st element as max
 
-        Integer[] a = new Integer[n1];       //Creating Integer object with reference variable a
-
-        //for loop for initializing elements in array
-        for (int i = 0; i < n1; i++) {
-            logger.info("Enter element in Index [" + i + "] : ");
-            a[i] = sc.nextInt();
+        /* Comparing max with each element using compareTo method and assigning value to max */
+        if(y.compareTo(max) > 0) {
+            max = y;
         }
-
-        maxInteger(a);     //Calling maxInteger method
+        if(z.compareTo(max) > 0) {
+            max = z;
+        }
+        printMax(x,y,z,max);        //Calling printMax method
     }
 
-    /* Creating maxFloat method for finding max value from float array */
-    public void maxFloat(Float[] b) {
-        // Using extended for loop for finding max float value
-        for(float data : b) {
-            if(data > maxFloat) {       //Assigning value to maxFloat if element in array is greater than maxFloat
-                maxFloat =  data;
-            }
-        }
-
-        //Printing maxFloat value
-        logger.info("Maximum float value is: " + maxFloat + "\n");
-    }
-
-    /* Creating printMaxIFloat method for taking user input and printing max value */
-    public void printMaxFloat() {
-        //Taking user input for number of elements in Float array
-        logger.info("Enter number of elements in Float array: ");
-        int n2 = sc.nextInt();
-
-        Float[] b = new Float[n2];       //Creating Integer object with reference variable a
-
-        //for loop for initializing elements in array
-        for (int i = 0; i < n2; i++) {
-            logger.info("Enter element in Index [" + i + "] : ");
-            b[i] = sc.nextFloat();
-        }
-
-        maxFloat(b);       //Calling maxFloat method
-    }
-
-    public void maxString(String[] c) {
-        String maxString =  c[0];
-        // Using extended for loop for finding max String value
-        for(int i = 0; i < c.length; i++) {
-            if(c[i].compareTo(maxString) > 1) {
-                maxString = c[i];
-            }
-        }
-
-        //Printing maxString value
-        logger.info("Maximum String value is: " + maxString + "\n");
-    }
-
-    public void printMaxString() {
-        //Taking user input for number of elements in String array
-        logger.info("Enter number of elements in String array: ");
-        int n3 = sc.nextInt();
-
-        String[] c = new String[n3];       //Creating String object with reference variable a
-
-        //for loop for initializing elements in array
-        for (int i = 0; i < n3; i++) {
-            logger.info("Enter element in Index [" + i + "] : ");
-            c[i] = sc.next();
-        }
-
-        maxString(c);       //Calling maxFloat method
+    /* Print max method for printing max element */
+    private static <E extends Comparable<E>> void printMax(E x, E y, E z, E max) {
+        logger.info("Maximum element from " + x + ", " + y + " and " + z + " is " + max );
     }
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
-        Generics generics = new Generics();     //Creating object of generics class
 
-        generics.printMaxInteger();     //Calling printMaxInteger function to print max value
-        generics.printMaxFloat();       //Calling printMaxFloat function to print max value
-        generics.printMaxString();      //Calling printMaxString function to print max value
+        // Creating objects for Integer, Float and String data type and giving parameters
+        Integer xInt = 1, yInt = 4, zInt = 2;
+        Float xFl = 1.02f, yFl = 2.56f, zFl = 1.25f;
+        String xStr = "Sarvesh", yStr = "Vaibhav", zStr = "Romil";
+
+        /* Note:
+         Creating object for Generics class and giving array as input to parameterized constructor
+         Generics myArray = new Generics<Integer>(a);        //Restricting only Integer data type
+         Generics myArray = new Generics(b);      //This can take all types of data
+         myArray.toPrint();      // calling toPrint method  */
+
+        /* Printing max element from each data type */
+        new Generics<String>(xStr, yStr, zStr).maximum(xStr, yStr, zStr);
+        new Generics<Integer>(xInt,yInt,zInt).maximum(xInt,yInt,zInt);
+        new Generics<Float>(xFl,yFl,zFl).maximum(xFl,yFl,zFl);
     }
 }
