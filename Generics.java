@@ -53,7 +53,7 @@ public class Generics <E extends Comparable<E>> {
          Creating object for Generics class and giving array as input to parameterized constructor
          Generics myArray = new Generics<Integer>(a);        //Restricting only Integer data type
          Generics myArray = new Generics(b);      //This can take all types of data
-         myArray.toPrint();      // calling toPrint method  */
+         myArray.toPrint();     // calling toPrint method  */
 
         /* Printing max element from each data type */
         new Generics<String>(xStr, yStr, zStr).maximum(xStr, yStr, zStr);
