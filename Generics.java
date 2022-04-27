@@ -74,12 +74,42 @@ public class Generics {
 
         maxFloat(b);       //Calling maxFloat method
     }
-    
+
+    public void maxString(String[] c) {
+        String maxString =  c[0];
+        // Using extended for loop for finding max String value
+        for(int i = 0; i < c.length; i++) {
+            if(c[i].compareTo(maxString) > 1) {
+                maxString = c[i];
+            }
+        }
+
+        //Printing maxString value
+        logger.info("Maximum String value is: " + maxString + "\n");
+    }
+
+    public void printMaxString() {
+        //Taking user input for number of elements in String array
+        logger.info("Enter number of elements in String array: ");
+        int n3 = sc.nextInt();
+
+        String[] c = new String[n3];       //Creating String object with reference variable a
+
+        //for loop for initializing elements in array
+        for (int i = 0; i < n3; i++) {
+            logger.info("Enter element in Index [" + i + "] : ");
+            c[i] = sc.next();
+        }
+
+        maxString(c);       //Calling maxFloat method
+    }
+
     public static void main(String[] args) {
         BasicConfigurator.configure();
         Generics generics = new Generics();     //Creating object of generics class
 
         generics.printMaxInteger();     //Calling printMaxInteger function to print max value
         generics.printMaxFloat();       //Calling printMaxFloat function to print max value
+        generics.printMaxString();      //Calling printMaxString function to print max value
     }
 }
